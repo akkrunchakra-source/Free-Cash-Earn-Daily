@@ -5,137 +5,70 @@
 <title>Free-Cash-With-Recharge-Earn</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-*{box-sizing:border-box;font-family:Arial, sans-serif}
+*{box-sizing:border-box;font-family:Arial,sans-serif}
 body{margin:0;background:#f1f1f1}
 
 /* HEADER */
-.top{
-background:#ffcc00;
-padding:12px;
-font-size:18px;
-font-weight:bold;
-}
-.sub{
-font-size:12px;
-font-weight:normal;
-}
+.top{background:#ffcc00;padding:12px;font-size:18px;font-weight:bold}
+.sub{font-size:12px;font-weight:normal}
 
-/* WITHDRAW BOX */
-.withdraw{
-background:#ffd84d;
-margin:10px;
-border-radius:10px;
-padding:12px;
-}
-.amount{
-font-size:26px;
-font-weight:bold;
-}
+/* WITHDRAW */
+.withdraw{background:#ffd84d;margin:10px;border-radius:10px;padding:12px}
+.amount{font-size:26px;font-weight:bold}
 
 /* TABS */
-.tabs{
-display:flex;
-margin-top:10px;
-}
-.tab{
-flex:1;
-text-align:center;
-padding:8px;
-background:#fff;
-border-radius:6px;
-margin-right:5px;
-font-size:13px;
-}
-.tab.active{
-background:#0d6efd;
-color:#fff;
-}
+.tabs{display:flex;margin-top:10px}
+.tab{flex:1;text-align:center;padding:8px;background:#fff;border-radius:6px;margin-right:5px;font-size:13px}
+.tab.active{background:#0d6efd;color:#fff}
 
 /* CARD */
-.card{
-background:#fff;
-margin:10px;
-border-radius:10px;
-padding:12px;
-}
+.card{background:#fff;margin:10px;border-radius:10px;padding:12px}
 
-/* BUTTON GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:8px;
-margin-top:10px;
-}
-.grid div{
-background:#e9ecef;
-padding:10px;
-text-align:center;
-border-radius:6px;
-font-weight:bold;
-}
+/* GRID */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.grid div{background:#e9ecef;padding:10px;text-align:center;border-radius:6px;font-weight:bold}
 
 /* BUTTON */
-button{
-width:100%;
-padding:12px;
-border:none;
-border-radius:6px;
-background:#0d6efd;
-color:#fff;
-font-size:16px;
-margin-top:10px;
-}
+button{width:100%;padding:12px;border:none;border-radius:6px;background:#0d6efd;color:#fff;font-size:16px;margin-top:10px}
 
-/* HIDE */
-.hidden{display:none}
+/* COMMENT SECTION */
+.social{display:flex;justify-content:space-around;border-top:1px solid #ddd;padding-top:8px;font-size:14px}
+.comment-box{display:flex;margin-top:10px}
+.comment-box input{flex:1;padding:8px;border:1px solid #ccc;border-radius:20px}
+
+/* COMMENTS */
+.comment{display:flex;margin-top:10px}
+.avatar{
+width:35px;height:35px;border-radius:50%;
+background:#0d6efd;color:#fff;
+display:flex;align-items:center;justify-content:center;
+font-weight:bold;margin-right:8px
+}
+.comment-text{
+background:#f0f2f5;padding:8px;border-radius:10px;font-size:13px
+}
 
 /* LIVE */
-.live{
-color:green;
-font-size:13px;
-animation:blink 1s infinite;
-}
+.live{color:green;font-size:13px;animation:blink 1s infinite}
 @keyframes blink{50%{opacity:.4}}
 
 /* SUCCESS */
-.success{
-font-size:18px;
-color:green;
-text-align:center;
-animation:fade 1s infinite alternate;
-}
+.success{text-align:center;font-size:18px;color:green;animation:fade 1s infinite alternate}
 @keyframes fade{from{opacity:.4}to{opacity:1}}
 
-/* BOTTOM NAV */
-.nav{
-position:fixed;
-bottom:0;
-left:0;
-right:0;
-background:#fff;
-display:flex;
-border-top:1px solid #ccc;
-}
-.nav div{
-flex:1;
-text-align:center;
-padding:8px;
-font-size:12px;
-}
-.disclaimer{
-font-size:11px;
-color:red;
-text-align:center;
-margin:10px;
-}
+/* NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #ccc}
+.nav div{flex:1;text-align:center;padding:8px;font-size:12px}
+
+.hidden{display:none}
+.disclaimer{font-size:11px;color:red;text-align:center;margin:10px}
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1 -->
+<!-- HOME -->
 <div id="home">
-
 <div class="top">
 Free-Cash-With-Recharge-Earn
 <div class="sub">No investment no Diposit Earn Money Daily Free time.</div>
@@ -144,7 +77,6 @@ Free-Cash-With-Recharge-Earn
 <div class="withdraw">
 Withdraw
 <div class="amount">₹517.32</div>
-
 <div class="tabs">
 <div class="tab">Paytm</div>
 <div class="tab">Bank</div>
@@ -157,17 +89,47 @@ Withdraw
 <button onclick="openRecharge()">📱 Free Mobile Recharge</button>
 </div>
 
+<!-- COMMENT SECTION -->
+<div class="card">
+<div class="social">
+<div>👍 Like</div>
+<div>💬 Comment</div>
+<div>↗️ Share</div>
 </div>
 
-<!-- SCREEN 2 -->
-<div id="recharge" class="hidden">
+<div class="comment-box">
+<input type="text" placeholder="Write a comment...">
+</div>
 
+<div class="comment">
+<div class="avatar">P</div>
+<div class="comment-text"><b>Pooja Sharma</b><br>thank you so much for your support</div>
+</div>
+
+<div class="comment">
+<div class="avatar">R</div>
+<div class="comment-text"><b>Rahul</b><br>mera toh 1GB wala active hua hai data</div>
+</div>
+
+<div class="comment">
+<div class="avatar">M</div>
+<div class="comment-text"><b>Manoj Kumar</b><br>bhai jio ke liye yeh sirf</div>
+</div>
+
+<div class="comment">
+<div class="avatar">A</div>
+<div class="comment-text"><b>Anika Sharma</b><br>thanks 🙏😊 for mujhe first free recharge dene ke liye</div>
+</div>
+</div>
+</div>
+
+<!-- RECHARGE -->
+<div id="recharge" class="hidden">
 <div class="top">📱 Free Mobile Recharge</div>
 
 <div class="card">
 <input type="tel" placeholder="मोबाइल नंबर डालें" maxlength="10" style="width:100%;padding:10px">
 <p><b>Jio Recharge Plans</b></p>
-
 <div class="grid">
 <div>₹19<br>1GB</div>
 <div>₹11<br>Data</div>
@@ -176,7 +138,6 @@ Withdraw
 <div>₹399<br>2.5GB</div>
 <div>₹599<br>3GB</div>
 </div>
-
 <button onclick="doRecharge()">Recharge Now</button>
 </div>
 
@@ -185,13 +146,10 @@ Withdraw
 <div id="live" class="live"></div>
 </div>
 
-<div class="disclaimer">
-⚠️ This is a demo website. No real recharge is provided.
+<div class="disclaimer">⚠️ This is a demo website. No real recharge is provided.</div>
 </div>
 
-</div>
-
-<!-- SCREEN 3 -->
+<!-- SUCCESS -->
 <div id="success" class="hidden">
 <div class="card success">
 ✅ Your Recharge Successfully Completed  
@@ -199,7 +157,7 @@ Withdraw
 </div>
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- NAV -->
 <div class="nav">
 <div>Daily</div>
 <div>NEW</div>
@@ -216,11 +174,8 @@ recharge.classList.remove("hidden");
 function doRecharge(){
 recharge.classList.add("hidden");
 success.classList.remove("hidden");
-setTimeout(()=>{
-alert("SMS: Your Recharge Successfully Completed");
-},2000);
+setTimeout(()=>{alert("SMS: Your Recharge Successfully Completed");},2000);
 }
-
 let list=[
 "98****3210 ₹299 Recharge Success",
 "87****4456 ₹199 Recharge Success",
