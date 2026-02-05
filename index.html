@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Free Recharge Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right,#00c6ff,#0072ff);
+    color:#fff;
+    text-align:center;
+    padding:20px;
+}
+.box{
+    background:#ffffff;
+    color:#000;
+    border-radius:10px;
+    padding:20px;
+    max-width:350px;
+    margin:auto;
+}
+input, select, button{
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border-radius:5px;
+    border:none;
+}
+button{
+    background:#0072ff;
+    color:#fff;
+    font-size:16px;
+}
+.note{
+    font-size:12px;
+    color:red;
+    margin-top:10px;
+}
+</style>
+</head>
+<body>
+
+<h2>📱 Free Mobile Recharge</h2>
+
+<div class="box">
+    <input type="tel" placeholder="Enter Mobile Number" maxlength="10">
+
+    <select>
+        <option>Select Operator</option>
+        <option>Jio</option>
+        <option>Airtel</option>
+        <option>VI</option>
+        <option>BSNL</option>
+    </select>
+
+    <select>
+        <option>Select Amount</option>
+        <option>₹10</option>
+        <option>₹20</option>
+        <option>₹50</option>
+        <option>₹100</option>
+    </select>
+
+    <button onclick="demo()">Recharge Now</button>
+
+    <p class="note">
+        ⚠️ This is a demo website only.<br>
+        No real recharge is provided.
+    </p>
+</div>
+
+<script>
+function demo(){
+    alert("❌ Demo Only!\nNo real recharge will be done.");
+}
+</script>
+
+</body>
+</html>
