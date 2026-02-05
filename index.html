@@ -31,10 +31,16 @@ body{margin:0;background:#f1f1f1}
 /* BUTTON */
 button{width:100%;padding:12px;border:none;border-radius:6px;background:#0d6efd;color:#fff;font-size:16px;margin-top:10px}
 
-/* COMMENT SECTION */
-.social{display:flex;justify-content:space-around;border-top:1px solid #ddd;padding-top:8px;font-size:14px}
-.comment-box{display:flex;margin-top:10px}
+/* SOCIAL */
+.social{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #ddd;padding-top:8px;font-size:14px}
+.actions{display:flex;gap:12px}
+.counts{font-size:13px;color:#555}
+.emojis{font-size:16px}
+
+/* COMMENT INPUT */
+.comment-box{display:flex;gap:8px;margin-top:10px}
 .comment-box input{flex:1;padding:8px;border:1px solid #ccc;border-radius:20px}
+.comment-box button{width:auto;padding:8px 12px;border-radius:20px;font-size:14px}
 
 /* COMMENTS */
 .comment{display:flex;margin-top:10px}
@@ -44,9 +50,7 @@ background:#0d6efd;color:#fff;
 display:flex;align-items:center;justify-content:center;
 font-weight:bold;margin-right:8px
 }
-.comment-text{
-background:#f0f2f5;padding:8px;border-radius:10px;font-size:13px
-}
+.comment-text{background:#f0f2f5;padding:8px;border-radius:10px;font-size:13px}
 
 /* LIVE */
 .live{color:green;font-size:13px;animation:blink 1s infinite}
@@ -69,123 +73,142 @@ background:#f0f2f5;padding:8px;border-radius:10px;font-size:13px
 
 <!-- HOME -->
 <div id="home">
-<div class="top">
-Free-Cash-With-Recharge-Earn
-<div class="sub">No investment no Diposit Earn Money Daily Free time.</div>
-</div>
+  <div class="top">
+    Free-Cash-With-Recharge-Earn
+    <div class="sub">No investment no Diposit Earn Money Daily Free time.</div>
+  </div>
 
-<div class="withdraw">
-Withdraw
-<div class="amount">₹517.32</div>
-<div class="tabs">
-<div class="tab">Paytm</div>
-<div class="tab">Bank</div>
-<div class="tab active" onclick="openRecharge()">Free Mobile Recharge</div>
-</div>
-</div>
+  <div class="withdraw">
+    Withdraw
+    <div class="amount">₹517.32</div>
+    <div class="tabs">
+      <div class="tab">Paytm</div>
+      <div class="tab">Bank</div>
+      <div class="tab active" onclick="openRecharge()">Free Mobile Recharge</div>
+    </div>
+  </div>
 
-<div class="card">
-<p>आपका रिचार्ज 15 मिनट के भीतर कर दिया जाएगा।</p>
-<button onclick="openRecharge()">📱 Free Mobile Recharge</button>
-</div>
+  <div class="card">
+    <p>आपका रिचार्ज 15 मिनट के भीतर कर दिया जाएगा।</p>
+    <button onclick="openRecharge()">📱 Free Mobile Recharge</button>
+  </div>
 
-<!-- COMMENT SECTION -->
-<div class="card">
-<div class="social">
-<div>👍 Like</div>
-<div>💬 Comment</div>
-<div>↗️ Share</div>
-</div>
+  <!-- SOCIAL + COMMENTS -->
+  <div class="card">
+    <div class="social">
+      <div class="actions">
+        <div>👍 Like</div>
+        <div>💬 Comment</div>
+        <div>↗️ Share</div>
+      </div>
+      <div class="counts">
+        <span class="emojis">👍❤️😊</span> <b>46k Likes</b> · <b>10k Shares</b>
+      </div>
+    </div>
 
-<div class="comment-box">
-<input type="text" placeholder="Write a comment...">
-</div>
+    <div class="comment-box">
+      <input id="newComment" type="text" placeholder="Write a comment...">
+      <button onclick="addComment()">Post</button>
+    </div>
 
-<div class="comment">
-<div class="avatar">P</div>
-<div class="comment-text"><b>Pooja Sharma</b><br>thank you so much for your support</div>
-</div>
-
-<div class="comment">
-<div class="avatar">R</div>
-<div class="comment-text"><b>Rahul</b><br>mera toh 1GB wala active hua hai data</div>
-</div>
-
-<div class="comment">
-<div class="avatar">M</div>
-<div class="comment-text"><b>Manoj Kumar</b><br>bhai jio ke liye yeh sirf</div>
-</div>
-
-<div class="comment">
-<div class="avatar">A</div>
-<div class="comment-text"><b>Anika Sharma</b><br>thanks 🙏😊 for mujhe first free recharge dene ke liye</div>
-</div>
-</div>
+    <!-- FAKE COMMENTS -->
+    <div id="comments">
+      <div class="comment">
+        <div class="avatar">P</div>
+        <div class="comment-text"><b>Pooja Sharma</b><br>thank you so much for your support</div>
+      </div>
+      <div class="comment">
+        <div class="avatar">R</div>
+        <div class="comment-text"><b>Rahul</b><br>mera toh 1GB wala active hua hai data</div>
+      </div>
+      <div class="comment">
+        <div class="avatar">M</div>
+        <div class="comment-text"><b>Manoj Kumar</b><br>bhai jio ke liye yeh sirf</div>
+      </div>
+      <div class="comment">
+        <div class="avatar">A</div>
+        <div class="comment-text"><b>Anika Sharma</b><br>thanks 🙏😊 for mujhe first free recharge dene ke liye</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- RECHARGE -->
 <div id="recharge" class="hidden">
-<div class="top">📱 Free Mobile Recharge</div>
+  <div class="top">📱 Free Mobile Recharge</div>
 
-<div class="card">
-<input type="tel" placeholder="मोबाइल नंबर डालें" maxlength="10" style="width:100%;padding:10px">
-<p><b>Jio Recharge Plans</b></p>
-<div class="grid">
-<div>₹19<br>1GB</div>
-<div>₹11<br>Data</div>
-<div>₹199<br>1.5GB</div>
-<div>₹299<br>2GB</div>
-<div>₹399<br>2.5GB</div>
-<div>₹599<br>3GB</div>
-</div>
-<button onclick="doRecharge()">Recharge Now</button>
-</div>
+  <div class="card">
+    <input type="tel" placeholder="मोबाइल नंबर डालें" maxlength="10" style="width:100%;padding:10px">
+    <p><b>Jio Recharge Plans</b></p>
+    <div class="grid">
+      <div>₹19<br>1GB</div>
+      <div>₹11<br>Data</div>
+      <div>₹199<br>1.5GB</div>
+      <div>₹299<br>2GB</div>
+      <div>₹399<br>2.5GB</div>
+      <div>₹599<br>3GB</div>
+    </div>
+    <button onclick="doRecharge()">Recharge Now</button>
+  </div>
 
-<div class="card">
-<b>🔴 Live Recharge</b>
-<div id="live" class="live"></div>
-</div>
+  <div class="card">
+    <b>🔴 Live Recharge</b>
+    <div id="live" class="live"></div>
+  </div>
 
-<div class="disclaimer">⚠️ This is a demo website. No real recharge is provided.</div>
+  <div class="disclaimer">⚠️ This is a demo website. No real recharge is provided.</div>
 </div>
 
 <!-- SUCCESS -->
 <div id="success" class="hidden">
-<div class="card success">
-✅ Your Recharge Successfully Completed  
-<br>⏳ Please wait 5 minutes
-</div>
+  <div class="card success">
+    ✅ Your Recharge Successfully Completed  
+    <br>⏳ Please wait 5 minutes
+  </div>
 </div>
 
 <!-- NAV -->
 <div class="nav">
-<div>Daily</div>
-<div>NEW</div>
-<div>Free Earn</div>
-<div>₹ Wallet</div>
-<div>Watch Videos</div>
+  <div>Daily</div>
+  <div>NEW</div>
+  <div>Free Earn</div>
+  <div>₹ Wallet</div>
+  <div>Watch Videos</div>
 </div>
 
 <script>
 function openRecharge(){
-home.classList.add("hidden");
-recharge.classList.remove("hidden");
+  home.classList.add("hidden");
+  recharge.classList.remove("hidden");
 }
 function doRecharge(){
-recharge.classList.add("hidden");
-success.classList.remove("hidden");
-setTimeout(()=>{alert("SMS: Your Recharge Successfully Completed");},2000);
+  recharge.classList.add("hidden");
+  success.classList.remove("hidden");
+  setTimeout(()=>{alert("SMS: Your Recharge Successfully Completed");},2000);
 }
+
+// Add comment (frontend-only)
+function addComment(){
+  const text=document.getElementById('newComment').value.trim();
+  if(!text) return;
+  const wrap=document.createElement('div');
+  wrap.className='comment';
+  wrap.innerHTML = '<div class="avatar">U</div><div class="comment-text"><b>You</b><br>'+text+'</div>';
+  document.getElementById('comments').prepend(wrap);
+  document.getElementById('newComment').value='';
+}
+
+// Live fake list
 let list=[
-"98****3210 ₹299 Recharge Success",
-"87****4456 ₹199 Recharge Success",
-"76****8899 ₹19 Recharge Success",
-"91****2234 ₹599 Recharge Success"
+  "98****3210 ₹299 Recharge Success",
+  "87****4456 ₹199 Recharge Success",
+  "76****8899 ₹19 Recharge Success",
+  "91****2234 ₹599 Recharge Success"
 ];
 let i=0;
 setInterval(()=>{
-document.getElementById("live").innerText=list[i];
-i=(i+1)%list.length;
+  document.getElementById("live").innerText=list[i];
+  i=(i+1)%list.length;
 },2000);
 </script>
 
