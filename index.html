@@ -31,24 +31,27 @@ body{margin:0;background:#f1f1f1}
 /* BUTTON */
 button{width:100%;padding:12px;border:none;border-radius:6px;background:#0d6efd;color:#fff;font-size:16px;margin-top:10px}
 
-/* SOCIAL */
-.social{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #ddd;padding-top:8px;font-size:14px}
-.actions{display:flex;gap:12px}
-.counts{font-size:13px;color:#555}
+/* SOCIAL (single row only) */
+.social-row{
+display:flex;justify-content:space-between;align-items:center;
+border-top:1px solid #ddd;border-bottom:1px solid #ddd;
+padding:8px 0;font-size:14px;margin-top:6px
+}
+.social-left{display:flex;gap:14px}
+.social-right{font-size:13px;color:#555}
 .emojis{font-size:16px}
 
 /* COMMENT INPUT */
 .comment-box{display:flex;gap:8px;margin-top:10px}
 .comment-box input{flex:1;padding:8px;border:1px solid #ccc;border-radius:20px}
-.comment-box button{width:auto;padding:8px 12px;border-radius:20px;font-size:14px}
+.comment-box button{width:auto;padding:8px 14px;border-radius:20px;font-size:14px}
 
 /* COMMENTS */
 .comment{display:flex;margin-top:10px}
 .avatar{
-width:35px;height:35px;border-radius:50%;
-background:#0d6efd;color:#fff;
+width:36px;height:36px;border-radius:50%;
 display:flex;align-items:center;justify-content:center;
-font-weight:bold;margin-right:8px
+font-size:18px;margin-right:8px;background:#eef2ff
 }
 .comment-text{background:#f0f2f5;padding:8px;border-radius:10px;font-size:13px}
 
@@ -95,39 +98,59 @@ font-weight:bold;margin-right:8px
 
   <!-- SOCIAL + COMMENTS -->
   <div class="card">
-    <div class="social">
-      <div class="actions">
+    <!-- SINGLE SOCIAL ROW (no duplicates) -->
+    <div class="social-row">
+      <div class="social-left">
         <div>👍 Like</div>
         <div>💬 Comment</div>
         <div>↗️ Share</div>
       </div>
-      <div class="counts">
+      <div class="social-right">
         <span class="emojis">👍❤️😊</span> <b>46k Likes</b> · <b>10k Shares</b>
       </div>
     </div>
 
+    <!-- COMMENT INPUT -->
     <div class="comment-box">
       <input id="newComment" type="text" placeholder="Write a comment...">
       <button onclick="addComment()">Post</button>
     </div>
 
-    <!-- FAKE COMMENTS -->
+    <!-- COMMENTS LIST -->
     <div id="comments">
       <div class="comment">
-        <div class="avatar">P</div>
+        <div class="avatar">👩‍🦰</div>
         <div class="comment-text"><b>Pooja Sharma</b><br>thank you so much for your support</div>
       </div>
+
       <div class="comment">
-        <div class="avatar">R</div>
+        <div class="avatar">🧑‍💼</div>
         <div class="comment-text"><b>Rahul</b><br>mera toh 1GB wala active hua hai data</div>
       </div>
+
       <div class="comment">
-        <div class="avatar">M</div>
+        <div class="avatar">👨‍🔧</div>
         <div class="comment-text"><b>Manoj Kumar</b><br>bhai jio ke liye yeh sirf</div>
       </div>
+
       <div class="comment">
-        <div class="avatar">A</div>
+        <div class="avatar">👩‍🎓</div>
         <div class="comment-text"><b>Anika Sharma</b><br>thanks 🙏😊 for mujhe first free recharge dene ke liye</div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar">🧔‍♂️</div>
+        <div class="comment-text"><b>Nitin Chaudhary</b><br>bhai is site par sirf ₹19 wala data mila hai, kal new number dala tha</div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar">😎</div>
+        <div class="comment-text"><b>Abhishek Singh</b><br>thanks 👍👍❤️ nice site really good</div>
+      </div>
+
+      <div class="comment">
+        <div class="avatar">👩‍💻</div>
+        <div class="comment-text"><b>Anjali Kashyap</b><br>konse sim ke liye hai yeh jio ya all</div>
       </div>
     </div>
   </div>
@@ -187,13 +210,13 @@ function doRecharge(){
   setTimeout(()=>{alert("SMS: Your Recharge Successfully Completed");},2000);
 }
 
-// Add comment (frontend-only)
+// Add comment (frontend demo)
 function addComment(){
   const text=document.getElementById('newComment').value.trim();
   if(!text) return;
   const wrap=document.createElement('div');
   wrap.className='comment';
-  wrap.innerHTML = '<div class="avatar">U</div><div class="comment-text"><b>You</b><br>'+text+'</div>';
+  wrap.innerHTML='<div class="avatar">🙂</div><div class="comment-text"><b>You</b><br>'+text+'</div>';
   document.getElementById('comments').prepend(wrap);
   document.getElementById('newComment').value='';
 }
