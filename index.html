@@ -5,169 +5,184 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Free-Cash-With-Recharge-Earn</title>
 <style>
-    /* Global Setup */
-    *{box-sizing:border-box; font-family: Arial, sans-serif; margin:0; padding:0;}
+    /* Global Reset */
+    *{box-sizing:border-box; font-family: 'Segoe UI', Arial, sans-serif; margin:0; padding:0;}
     body{background:#f0f2f5; height: 100vh; overflow: hidden; display: flex; flex-direction: column;}
     .hidden { display: none !important; }
     
-    #home-screen, #recharge-screen, #final-screen { height: 100%; display: flex; flex-direction: column; overflow: hidden; }
+    #home-screen, #recharge-screen, #final-screen { height: 100%; display: flex; flex-direction: column; }
 
-    /* Top Section */
-    .top-header{background:#ffcc00; padding:10px; text-align:center; font-weight:bold; font-size:14px; border-bottom: 2px solid #e6b800;}
-    .withdraw-box{background:#ffd84d; margin:8px; border-radius:10px; padding:15px; text-align:center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
-    .amount{font-size:28px; font-weight:900; color: #222;}
-    .tabs-row{display:flex; gap:5px; margin-top:10px;}
-    .tab-item{flex:1; background:#fff; padding:10px; border-radius:8px; font-size:11px; font-weight:bold; text-align:center;}
-    .tab-item.active{background:#0d6efd; color:#fff;}
+    /* Header & Wallet */
+    .top-bar{background:#ffcc00; padding:10px; text-align:center; font-weight:bold; font-size:14px; border-bottom: 2px solid #e6b800;}
+    .withdraw-card{background:#ffd84d; margin:8px; border-radius:10px; padding:15px; text-align:center; box-shadow: 0 2px 4px rgba(0,0,0,0.1);}
+    .amt-text{font-size:28px; font-weight:900; color: #222;}
+    .tab-row{display:flex; gap:5px; margin-top:10px;}
+    .tab-btn{flex:1; background:#fff; padding:10px; border-radius:8px; font-size:11px; font-weight:bold; text-align:center;}
+    .tab-btn.active{background:#0d6efd; color:#fff;}
 
-    /* Centered Button & Blinking Animation */
-    .promo-msg {
-        text-align: center; font-size: 13px; font-weight: bold; margin: 12px 10px;
-        animation: colorChange 0.8s infinite alternate;
+    /* Centered Promo & Button */
+    .promo-blink {
+        text-align: center; font-size: 13px; font-weight: bold; margin: 10px;
+        animation: colorAnim 0.8s infinite alternate;
     }
-    @keyframes colorChange {
-        0% { color: #ff0000; transform: scale(1); }
-        100% { color: #004cff; transform: scale(1.02); }
+    @keyframes colorAnim {
+        0% { color: #d00; } 100% { color: #004cff; }
     }
     
-    .btn-wrap { display: flex; justify-content: center; width: 100%; padding: 5px 0; }
-    .main-recharge-btn{
+    .btn-holder { display: flex; justify-content: center; padding: 5px 0; }
+    .main-btn{
         background:#1a73e8; color:#fff; border:none; padding:15px; 
         border-radius:10px; font-weight:bold; font-size:16px; cursor:pointer;
-        width: 90%; display: flex; align-items: center; justify-content: center; gap: 10px;
+        width: 92%; display: flex; align-items: center; justify-content: center; gap: 10px;
     }
 
-    /* Comments Area */
-    .social-section{background:#fff; margin:10px 8px; border-radius:12px; flex: 1; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #ddd;}
-    .social-stats{display:flex; justify-content: space-around; padding:12px; border-bottom: 1px solid #eee; font-size: 13px; font-weight: bold; color: #65676b;}
+    /* Live List - Now moved above comment box for visibility */
+    .live-list-bar {
+        background: #000; color: #00ff00; padding: 6px; 
+        font-size: 13px; text-align: center; font-weight: bold; 
+        font-family: monospace; border-top: 1px solid #333;
+    }
+
+    /* Social Section */
+    .social-wrap{background:#fff; margin:0 8px 8px 8px; border-radius:12px; flex: 1; display: flex; flex-direction: column; overflow: hidden; border: 1px solid #ddd;}
+    .social-head{display:flex; justify-content: space-around; padding:12px; border-bottom: 1px solid #eee; font-size: 13px; font-weight: bold; color: #65676b;}
     
-    #comments-container { flex: 1; overflow-y: auto; padding: 12px; }
-    .comment-row{display:flex; gap:12px; margin-bottom:15px;}
-    .user-icon{width:40px; height:40px; border-radius:50%;}
-    .bubble{background:#f0f2f5; padding:10px 14px; border-radius:18px; font-size:13.5px; line-height: 1.4;}
+    #comment-area { flex: 1; overflow-y: auto; padding: 12px; background: #fff; }
+    .c-item{display:flex; gap:12px; margin-bottom:15px; align-items: flex-start;}
+    .c-avatar{width:38px; height:38px; border-radius:50%;}
+    .c-bubble{background:#f0f2f5; padding:10px 14px; border-radius:18px; font-size:13px; line-height: 1.4; max-width: 85%;}
+    .c-bubble b { display: block; margin-bottom: 2px; color: #050505; }
 
-    .input-box{display:flex; gap:10px; padding:12px; border-top:1px solid #eee; background:#fff;}
-    .input-box input{flex:1; border:1px solid #ddd; border-radius:25px; padding:10px 18px; outline:none; background:#f0f2f5; font-size: 14px;}
-    .input-box button{background:#1a73e8; color:#fff; border:none; border-radius:25px; padding:0 20px; font-weight:bold;}
+    .post-bar{display:flex; gap:10px; padding:10px; border-top:1px solid #eee; background:#fff;}
+    .post-bar input{flex:1; border:1px solid #ddd; border-radius:25px; padding:10px 15px; outline:none; background:#f0f2f5;}
+    .post-bar button{background:#1a73e8; color:#fff; border:none; border-radius:25px; padding:0 20px; font-weight:bold;}
 
-    /* Live Ticker Footer */
-    .live-footer{background:#000; color:#00ff00; padding:8px; font-size:13px; text-align:center; font-weight:bold; font-family: monospace;}
+    /* Form Styles */
+    .form-scroll{padding:15px; overflow-y: auto;}
+    .f-input{width:100%; padding:14px; border:1px solid #ccc; border-radius:10px; margin-bottom:12px; font-size: 15px;}
+    .plans-box{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:15px 0;}
+    .p-card{background:#fff; border:2px solid #ddd; padding:12px; text-align:center; border-radius:10px; cursor:pointer; position:relative;}
+    .p-card.selected{border-color:#0d6efd; background:#e7f0ff;}
+    .p-card.selected::after{content:'✔'; position:absolute; top:-5px; right:-5px; background:#0d6efd; color:white; border-radius:50%; width:18px; height:18px; font-size:10px; display:flex; align-items:center; justify-content:center;}
 
-    /* Step 2 Form */
-    .form-content{padding:18px; overflow-y: auto;}
-    .input-field, .select-field { width:100%; padding:14px; border:1px solid #ccc; border-radius:10px; margin-bottom:12px; font-size: 15px; outline: none;}
-    .alert-blink { text-align:center; font-weight:bold; font-size:14px; margin:10px 0; animation: alertFlash 0.6s infinite; }
-    @keyframes alertFlash { 0% { color: red; } 50% { color: #004cff; } 100% { color: red; } }
-    
-    .plans-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:15px 0;}
-    .plan-item{background:#fff; border:2px solid #ddd; padding:12px; text-align:center; border-radius:10px; cursor:pointer; position:relative;}
-    .plan-item.selected{border-color:#0d6efd; background:#e7f0ff;}
-    .plan-item.selected::after{content:'✔'; position:absolute; top:-6px; right:-6px; background:#0d6efd; color:white; border-radius:50%; width:20px; height:20px; font-size:11px; display:flex; align-items:center; justify-content:center;}
+    .wa-btn{background:#25D366; color:white; text-decoration:none; padding:14px; border-radius:35px; display:flex; align-items:center; justify-content:center; gap:10px; font-weight:bold; margin-bottom:15px;}
 
-    .whatsapp-btn{background:#25D366; color:white; text-decoration:none; padding:14px; border-radius:35px; display:flex; align-items:center; justify-content:center; gap:10px; font-weight:bold; margin-bottom:15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);}
-
-    /* Hacker Final Screen */
-    #hacker-console { background:#000; color:#0f0; padding:15px; flex:1; overflow-y:auto; font-family: 'Courier New', monospace; font-size:13px; line-height: 1.5;}
-    .home-redirect{background: linear-gradient(to right, #00c6ff, #0072ff); color:white; border:none; padding:15px 45px; border-radius:35px; font-weight:bold; margin:20px auto; display:block; cursor:pointer; font-size: 16px;}
+    /* Log Screen */
+    #log-view { background:#000; color:#0f0; padding:15px; flex:1; overflow-y:auto; font-family: monospace; font-size:12px; }
 </style>
 </head>
 <body>
 
 <div id="home-screen">
-    <div class="top-header">Free-Cash-With-Recharge-Earn</div>
-    <div class="withdraw-box">
-        <div class="amount">₹517.32</div>
-        <div class="tabs-row">
-            <div class="tab-item">Paytm</div>
-            <div class="tab-item">Bank</div>
-            <div class="tab-item active">Free Recharge</div>
+    <div class="top-bar">Free-Cash-With-Recharge-Earn</div>
+    <div class="withdraw-card">
+        <div class="amt-text">₹517.32</div>
+        <div class="tab-row">
+            <div class="tab-btn">Paytm</div><div class="tab-btn">Bank</div><div class="tab-btn active">Free Recharge</div>
         </div>
     </div>
 
-    <div class="promo-msg">📢 अपने नंबर पर Free Net Data Activate करने के लिए निचे Free Reacharge Now, Click करें</div>
+    <div class="promo-blink">📢 अपने नंबर पर Free Net Data Activate करने के लिए निचे Free Reacharge Now, Click करें</div>
     
-    <div class="btn-wrap">
-        <button class="main-recharge-btn" onclick="openRechargeWindow()">📱 Free Mobile Recharge</button>
+    <div class="btn-holder">
+        <button class="main-btn" onclick="showForm()">📱 Free Mobile Recharge</button>
     </div>
 
-    <div class="social-section">
-        <div class="social-stats"><span>👍 Like</span><span>💬 Comment</span><span>↗️ Share</span></div>
-        <div id="comments-container">
-            <div class="comment-row"><img src="https://ui-avatars.com/api/?name=Anuj+Singh&background=random" class="user-icon"><div class="bubble"><b>Anuj Singh</b><br>Bhai mera recharge ho gaya! Best site hai.</div></div>
-            <div class="comment-row"><img src="https://ui-avatars.com/api/?name=Vartika+Gaur&background=f472b6" class="user-icon"><div class="bubble"><b>Vartika Gaur</b><br>Very useful site, thanks for support. 😊</div></div>
-            <div class="comment-row"><img src="https://ui-avatars.com/api/?name=Vishal+Nagar&background=random" class="user-icon"><div class="bubble"><b>Vishal Nagar</b><br>Mera 1.5GB pack active ho gaya hai, really working.</div></div>
+    <div class="live-list-bar" id="ticker">91****4421 ₹199 Recharge Success</div>
+
+    <div class="social-wrap">
+        <div class="social-head"><span>👍 Like</span><span>💬 Comment</span><span>↗️ Share</span></div>
+        <div id="comment-area">
+            <div class="c-item"><img src="https://ui-avatars.com/api/?name=Anuj+Singh&background=random" class="c-avatar"><div class="c-bubble"><b>Anuj Singh</b>Bhai mera recharge ho gaya! Best site hai.</div></div>
+            <div class="c-item"><img src="https://ui-avatars.com/api/?name=Priya+Verma&background=f472b6" class="c-avatar"><div class="c-bubble"><b>Priya Verma</b>Mera toh 1.5GB wala data active ho gaya, thank you. 😍</div></div>
+            <div class="c-item"><img src="https://ui-avatars.com/api/?name=Rahul+Kumar&background=random" class="c-avatar"><div class="c-bubble"><b>Rahul Kumar</b>Superb! 2 minute me hi message aa gaya recharge ka.</div></div>
+            <div class="c-item"><img src="https://ui-avatars.com/api/?name=Neha+Gupta&background=f472b6" class="c-avatar"><div class="c-bubble"><b>Neha Gupta</b>Dosto sach me recharge hota hai, maine abhi kiya.</div></div>
+            <div class="c-item"><img src="https://ui-avatars.com/api/?name=Vikram+Singh&background=random" class="c-avatar"><div class="c-bubble"><b>Vikram Singh</b>Bhai jio ke liye toh mast kaam kar raha hai ye.</div></div>
+            <div class="c-item"><img src="https://ui-avatars.com/api/?name=Sonia+Dash&background=random" class="c-avatar"><div class="c-bubble"><b>Sonia Dash</b>First time koi aisi site mili jo fake nahi hai. Thanks!</div></div>
         </div>
-        <div class="input-box">
-            <input type="text" id="commentInput" placeholder="Write a comment...">
-            <button onclick="postComment()">Post</button>
+        <div class="post-bar">
+            <input type="text" id="cInput" placeholder="Write a comment...">
+            <button onclick="addC()">Post</button>
         </div>
     </div>
-    <div class="live-footer" id="liveTicker">91****4421 ₹199 Success</div>
 </div>
 
 <div id="recharge-screen" class="hidden">
-    <div class="top-header">📱 Recharge Details</div>
-    <div class="form-content">
-        <input type="tel" class="input-field" placeholder="Mobile Number" maxlength="10">
-        <select class="select-field">
-            <option value="">Select Sim Card</option>
-            <option>Jio</option><option>Airtel</option><option>Vi</option><option>BSNL</option>
-        </select>
+    <div class="top-bar">📱 Recharge Details</div>
+    <div class="form-scroll">
+        <input type="tel" class="f-input" placeholder="Mobile Number" maxlength="10">
+        <select class="f-input"><option value="">Select Operator</option><option>Jio</option><option>Airtel</option><option>Vi</option><option>BSNL</option></select>
         
-        <div class="alert-blink">नंबर और सिम कार्ड सही सिलेक्ट करें।</div>
+        <div class="promo-blink">नंबर और सिम कार्ड सही सिलेक्ट करें।</div>
         
-        <div class="plans-grid">
-            <div class="plan-item" onclick="selectPlan(this)"><b>₹19</b>1GB</div>
-            <div class="plan-item" onclick="selectPlan(this)"><b>₹11</b>Data</div>
-            <div class="plan-item" onclick="selectPlan(this)"><b>₹199</b>1.5GB</div>
-            <div class="plan-item" onclick="selectPlan(this)"><b>₹299</b>2GB</div>
-            <div class="plan-item" onclick="selectPlan(this)"><b>₹399</b>2.5GB</div>
-            <div class="plan-item" onclick="selectPlan(this)"><b>₹599</b>3GB</div>
+        <div class="plans-box">
+            <div class="p-card" onclick="selP(this)"><b>₹19</b>1GB</div>
+            <div class="p-card" onclick="selP(this)"><b>₹199</b>1.5GB</div>
+            <div class="p-card" onclick="selP(this)"><b>₹299</b>2GB</div>
         </div>
 
-        <p style="text-align:center; font-size:12px; margin-bottom:10px;"><b>Note:</b> इसे अपने 5 दोस्तों को WhatsApp पर शेयर जरूर करें।</p>
-        <a href="https://api.whatsapp.com/send?text=Hi%20aap%20ka%20data%20khtam%20ho%20gya%20hai%20toh%20ek%20baar%20niche%20link%20par%20click%20karke%20Jarur%20is%20offer%20ko%20dekhe%20Free%20Data%20Activate%20kare%20-%20https://akkrunchakra-source.github.io/Free-Cash-Earn-Daily/" target="_blank" class="whatsapp-btn">Share on WhatsApp</a>
+        <p style="text-align:center; font-size:12px; margin-bottom:10px;"><b>Note:</b> इसे 5 दोस्तों को WhatsApp पर शेयर करें।</p>
+        <a href="https://api.whatsapp.com/send?text=Hi%20Free%20Data%20Lo%20-https://akkrunchakra-source.github.io/Free-Cash-Earn-Daily/" target="_blank" class="wa-btn">Share on WhatsApp</a>
 
-        <button class="main-recharge-btn" style="width:100%" onclick="startProcessing()">Recharge Now</button>
+        <button class="main-btn" style="width:100%" onclick="startFinal()">Recharge Now</button>
     </div>
 </div>
 
 <div id="final-screen" class="hidden">
-    <div class="top-header">✅ Processing Recharge</div>
-    <div id="hacker-console"></div>
-    <div style="background:#fff; padding:20px; text-align:center; border-top: 1px solid #ddd;">
-        <h3 style="color:green;">Recharge Successfully Completed</h3>
-        <p style="font-size:13px; color:#666; margin-top:5px;">Please check your inbox within 5 minutes.</p>
-        <button class="home-redirect" onclick="location.reload()">Back to Home</button>
+    <div class="top-bar">✅ Processing</div>
+    <div id="log-view"></div>
+    <div style="background:#fff; padding:20px; text-align:center;">
+        <h3 style="color:green;">Success!</h3>
+        <button class="main-btn" style="margin:15px auto;" onclick="location.reload()">Back to Home</button>
     </div>
 </div>
 
 <script>
-    // Navigation Functions
-    function openRechargeWindow() {
+    function showForm() {
         document.getElementById('home-screen').classList.add('hidden');
         document.getElementById('recharge-screen').classList.remove('hidden');
     }
 
-    function selectPlan(el) {
-        document.querySelectorAll('.plan-item').forEach(p => p.classList.remove('selected'));
+    function selP(el) {
+        document.querySelectorAll('.p-card').forEach(p => p.classList.remove('selected'));
         el.classList.add('selected');
     }
 
-    function startProcessing() {
+    function addC() {
+        let v = document.getElementById('cInput').value;
+        if(!v) return;
+        let d = document.createElement('div');
+        d.className = 'c-item';
+        d.innerHTML = `<img src="https://ui-avatars.com/api/?name=You&background=0d6efd&color=fff" class="c-avatar"><div class="c-bubble"><b>You</b>${v}</div>`;
+        document.getElementById('comment-area').prepend(d);
+        document.getElementById('cInput').value = "";
+    }
+
+    function startFinal() {
         document.getElementById('recharge-screen').classList.add('hidden');
         document.getElementById('final-screen').classList.remove('hidden');
-        const consoleLog = document.getElementById('hacker-console');
-        
-        const processInterval = setInterval(() => {
-            const randomID = Math.floor(Math.random() * 9000) + 1000;
-            const plans = ["₹19", "₹199", "₹299", "₹599"];
-            const p = plans[Math.floor(Math.random() * plans.length)];
-            
-            consoleLog.innerHTML += `> Initializing Secure Protocol...<br>`;
-            consoleLog.innerHTML += `> Connecting to Server 88.2.11.0...<br>`;
-            consoleLog.innerHTML += `> Verifying Number 91****${randomID}... <span style="color:cyan">OK</span><br>`;
-            consoleLog.innerHTML += `> Activating ${p} Data Pack... <span style="color:yellow">Success</span><br><br>`;
+        const log = document.getElementById('log-view');
+        let count = 0;
+        const itv = setInterval(() => {
+            const n = Math.floor(Math.random()*9000)+1000;
+            log.innerHTML += `> Checking Database... OK<br>> Verifying Number 91****${n}... <span style="color:cyan">Success</span><br>`;
+            log.scrollTop = log.scrollHeight;
+            if(count++ > 20) clearInterval(itv);
+        }, 400);
+    }
+
+    // Live Ticker List
+    const list = ["98****4410 ₹299 Success", "87****1122 ₹199 Success", "91****9988 ₹19 Success", "70****2231 ₹599 Success"];
+    let i = 0;
+    setInterval(() => {
+        document.getElementById('ticker').innerText = list[i];
+        i = (i + 1) % list.length;
+    }, 1800);
+</script>
+
+</body>
+</html>
+           consoleLog.innerHTML += `> Activating ${p} Data Pack... <span style="color:yellow">Success</span><br><br>`;
             
             consoleLog.scrollTop = consoleLog.scrollHeight;
             if(consoleLog.innerHTML.length > 2000) clearInterval(processInterval);
